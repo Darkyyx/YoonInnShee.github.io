@@ -110,12 +110,12 @@
 
 <meta name="description" content="如月之恒，如日之升">
 <meta property="og:type" content="website">
-<meta property="og:title" content="YYX's Blog">
-<meta property="og:url" content="https://gootoo.top/index.html">
-<meta property="og:site_name" content="YYX's Blog">
+<meta property="og:title" content="YoonInnShee">
+<meta property="og:url" content="http://gootoo.top/index.html">
+<meta property="og:site_name" content="YoonInnShee">
 <meta property="og:description" content="如月之恒，如日之升">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="YYX's Blog">
+<meta name="twitter:title" content="YoonInnShee">
 <meta name="twitter:description" content="如月之恒，如日之升">
 
 
@@ -137,9 +137,9 @@
 
 
 
-  <link rel="canonical" href="https://gootoo.top/"/>
+  <link rel="canonical" href="http://gootoo.top/"/>
 
-  <title> YYX's Blog </title>
+  <title> YoonInnShee </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -178,11 +178,11 @@
   <div class="custom-logo-site-title">
     <a href="/"  class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <span class="site-title">YYX's Blog</span>
+      <span class="site-title">YoonInnShee</span>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
-  <p class="site-subtitle">Top Everything</p>
+  <p class="site-subtitle">Top Everything!</p>
 </div>
 
 <div class="site-nav-toggle">
@@ -533,7 +533,7 @@
 
       
         
-          <h2 id="1-ROOT-密码破解"><a href="#1-ROOT-密码破解" class="headerlink" title="1. ROOT 密码破解"></a>1. ROOT 密码破解</h2><p>破密码万年第一题，7 与之前的版本过程有点区别，涉及到 SELinux 部分。<br>首先在操作系统引导界面按任意键暂停启动，上下键选择需要启动的 grub 引导条目，按 “e” 编辑菜单，在内核命令行（linux16 那一行，倒数第二行）的结尾附加 <code>rd.break</code>，<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">linux16 /vmlinuz-3.10.0-327.el7.x86_64 root=/dev/Mapper/centos-root ro rd.lvm.lv=centos/root rd.lvm.lv=centos/swap rhgb quiet LANG=en_US.UTF-8 rd.break</div></pre></td></tr></table></figure></p>
+          <h2 id="1-ROOT-密码破解"><a href="#1-ROOT-密码破解" class="headerlink" title="1. ROOT 密码破解"></a>1. ROOT 密码破解</h2><p>破密码万年第一题，7 与之前的版本过程有点区别，涉及到 SELinux 部分。<br>首先在操作系统引导界面按任意键暂停启动，上下键选择需要启动的 grub 引导条目，按 <code>e</code> 编辑菜单，在内核命令行（linux16 那一行，倒数第二行）的结尾附加 <code>rd.break</code>，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">linux16 /vmlinuz-3.10.0-327.el7.x86_64 root=/dev/Mapper/centos-root ro rd.lvm.lv=centos/root rd.lvm.lv=centos/swap rhgb quiet LANG=en_US.UTF-8 rd.break</div></pre></td></tr></table></figure></p>
           <div class="post-more-link text-center">
             <a class="btn" href="/Linux/RedHat/rhcsa-1/#more" rel="contents">
               阅读全文 &raquo;
@@ -676,7 +676,7 @@
 
       
         
-          <h2 id="RedHat-认证体系"><a href="#RedHat-认证体系" class="headerlink" title="RedHat 认证体系"></a>RedHat 认证体系</h2><p>大名鼎鼎的 RedHat 就不介绍了，主要说明一下目前的认证体系：<br>基础：RHCSA（Red Hat Certified System Administrator），红帽认证系统管理员<br>进阶：RHCE（Red Hat Certified Engineer），红帽认证工程师<br>高级：RHCA（Red Hat Certified Architect），红帽认证架构师<br>
+          <h2 id="RedHat-认证体系"><a href="#RedHat-认证体系" class="headerlink" title="RedHat 认证体系"></a>RedHat 认证体系</h2><p>简介一下目前的认证体系：<br>基础：RHCSA（Red Hat Certified System Administrator），红帽认证系统管理员<br>进阶：RHCE（Red Hat Certified Engineer），红帽认证工程师<br>高级：RHCA（Red Hat Certified Architect），红帽认证架构师<br>
           <div class="post-more-link text-center">
             <a class="btn" href="/Linux/RedHat/certified/#more" rel="contents">
               阅读全文 &raquo;
@@ -809,7 +809,7 @@
         
           <h2 id="Lantern-介绍"><a href="#Lantern-介绍" class="headerlink" title="Lantern 介绍"></a>Lantern 介绍</h2><p>维基百科词条解释如下：</p>
 <blockquote>
-<p>蓝灯（Lantern）是一款用于突破网络审查的开源软件。<br>蓝灯的 CEO 和首席开发者亚当·菲斯克（Adam Fisk）是 LimeWire 和 LittleShoot 的前首席工程师。</p>
+<p>蓝灯（Lantern）是一款用于突破网络审查的开源软件。</p>
 </blockquote>
 <p>值得一提的是该工具 Google 是资助者之一，一种莫名的喜感，有木有~<br>
           <div class="post-more-link text-center">
@@ -877,8 +877,8 @@
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="https://o72d43lc8.qnssl.com/avatar.jpg"
-               alt="欲淫兮" />
-          <p class="site-author-name" itemprop="name">欲淫兮</p>
+               alt="YoonInnShee" />
+          <p class="site-author-name" itemprop="name">YoonInnShee</p>
           <p class="site-description motion-element" itemprop="description">如月之恒，如日之升</p>
         </div>
         <nav class="site-state motion-element">
@@ -973,7 +973,7 @@
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">欲淫兮</span>
+  <span class="author" itemprop="copyrightHolder">YoonInnShee</span>
 </div>
 
 <div class="powered-by">
