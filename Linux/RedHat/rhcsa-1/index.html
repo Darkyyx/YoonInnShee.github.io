@@ -92,7 +92,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="RHCSA,RedHat," />
 
 
 
@@ -108,15 +108,16 @@
 
 
 
-<meta name="description" content="如月之恒，如日之升">
-<meta property="og:type" content="website">
-<meta property="og:title" content="YYX's Blog">
-<meta property="og:url" content="https://gootoo.top/archives/index.html">
+<meta name="description" content="1. ROOT 密码破解破密码万年第一题，7 与之前的版本过程有点区别，涉及到 SELinux 部分。首先在操作系统引导界面按任意键暂停启动，上下键选择需要启动的 grub 引导条目，按 “e” 编辑菜单，在内核命令行（linux16 那一行，倒数第二行）的结尾附加 rd.break，1linux16 /vmlinuz-3.10.0-327.el7.x86_64 root=/dev/Mapper/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RadHat 7 认证系列教程（1）——开机故障恢复">
+<meta property="og:url" content="https://gootoo.top/Linux/RedHat/rhcsa-1/index.html">
 <meta property="og:site_name" content="YYX's Blog">
-<meta property="og:description" content="如月之恒，如日之升">
+<meta property="og:description" content="1. ROOT 密码破解破密码万年第一题，7 与之前的版本过程有点区别，涉及到 SELinux 部分。首先在操作系统引导界面按任意键暂停启动，上下键选择需要启动的 grub 引导条目，按 “e” 编辑菜单，在内核命令行（linux16 那一行，倒数第二行）的结尾附加 rd.break，1linux16 /vmlinuz-3.10.0-327.el7.x86_64 root=/dev/Mapper/">
+<meta property="og:updated_time" content="2016-08-28T13:04:55.722Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="YYX's Blog">
-<meta name="twitter:description" content="如月之恒，如日之升">
+<meta name="twitter:title" content="RadHat 7 认证系列教程（1）——开机故障恢复">
+<meta name="twitter:description" content="1. ROOT 密码破解破密码万年第一题，7 与之前的版本过程有点区别，涉及到 SELinux 部分。首先在操作系统引导界面按任意键暂停启动，上下键选择需要启动的 grub 引导条目，按 “e” 编辑菜单，在内核命令行（linux16 那一行，倒数第二行）的结尾附加 rd.break，1linux16 /vmlinuz-3.10.0-327.el7.x86_64 root=/dev/Mapper/">
 
 
 
@@ -137,9 +138,9 @@
 
 
 
-  <link rel="canonical" href="https://gootoo.top/archives/"/>
+  <link rel="canonical" href="https://gootoo.top/Linux/RedHat/rhcsa-1/"/>
 
-  <title> 归档 | YYX's Blog </title>
+  <title> RadHat 7 认证系列教程（1）——开机故障恢复 | YYX's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -166,7 +167,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  page-archive  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -287,177 +288,189 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
-
-    <span class="archive-page-counter">
-      
-      
-      
-        
-      
-      嗯..! 目前共计 4 篇日志。 继续努力。
-    </span>
-
+  <div id="posts" class="posts-expand">
     
-
-      
-      
-      
-
-      
-        
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2016">2016</h2>
-        </div>
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/科学上网/ssh-port-forwarding-accelerate-ss/" itemprop="url">
-              
-                <span itemprop="name">建立 SSH 隧道端口转发穿透内网加速 SS</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-08-28T21:06:32+08:00"
-              content="2016-08-28" >
-          08-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/Linux/RedHat/rhcsa-1/" itemprop="url">
-              
-                <span itemprop="name">RadHat 7 认证系列教程（1）——开机故障恢复</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-08-28T20:51:41+08:00"
-              content="2016-08-28" >
-          08-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/Linux/RedHat/certified/" itemprop="url">
-              
-                <span itemprop="name">RadHat 7 认证系列教程——作者声明</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-08-23T14:25:37+08:00"
-              content="2016-08-23" >
-          08-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/科学上网/lantern/" itemprop="url">
-              
-                <span itemprop="name">科学上网平民钝器──Lantern</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-08-23T14:04:32+08:00"
-              content="2016-08-23" >
-          08-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-  </section>
 
   
+  
 
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                RadHat 7 认证系列教程（1）——开机故障恢复
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-28T20:51:41+08:00" content="2016-08-28">
+              2016-08-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/RedHat/" itemprop="url" rel="index">
+                    <span itemprop="name">RedHat</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/Linux/RedHat/rhcsa-1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="Linux/RedHat/rhcsa-1/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/Linux/RedHat/rhcsa-1/" class="leancloud_visitors" data-flag-title="RadHat 7 认证系列教程（1）——开机故障恢复">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1-ROOT-密码破解"><a href="#1-ROOT-密码破解" class="headerlink" title="1. ROOT 密码破解"></a>1. ROOT 密码破解</h2><p>破密码万年第一题，7 与之前的版本过程有点区别，涉及到 SELinux 部分。<br>首先在操作系统引导界面按任意键暂停启动，上下键选择需要启动的 grub 引导条目，按 “e” 编辑菜单，在内核命令行（linux16 那一行，倒数第二行）的结尾附加 <code>rd.break</code>，<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">linux16 /vmlinuz-3.10.0-327.el7.x86_64 root=/dev/Mapper/centos-root ro rd.lvm.lv=centos/root rd.lvm.lv=centos/swap rhgb quiet LANG=en_US.UTF-8 rd.break</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>按 <code>Ctrl</code> + <code>X</code> 执行引导，进入终端。（该参数表示中断 initramfs 向实际系统移交控制权）<br>此时，会显示 root shell，且实际系统的 root 文件系统会在 /sysroot 中以只读方式挂载，<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mount -o remount,rw /sysroot         //已读写方式重新挂载</div><div class="line">chroot /sysroot                      //将文件树的根切换为 sysroot</div><div class="line"><span class="built_in">echo</span> password | passwd --stdin root  //为root设置新密码，自行替换 password 字符</div></pre></td></tr></table></figure></p>
+<p>由于此时尚未启用 SELinux，因此任何创建的新文件都不会被分配 SELinux 上下文，有些工具（例如 passwd）的原理是先创建一个新文件，然后替换要编辑保存的文件，所以编辑密码后 /etc/shadow 文件将不再有上下文，重新使新文件获得标记的方法就是在根下面创建一个隐藏空文件 <code>autorelabel</code>，<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">touch /.autorelabel</div><div class="line"><span class="built_in">exit</span>    //第一次退出 sysroot 环境</div><div class="line"><span class="built_in">exit</span>    //第二次退出 initramfs 调试终端，自动重启</div></pre></td></tr></table></figure></p>
+<p>注意 <code>/.</code> 和 <code>./</code> 的区别。</p>
+<h2 id="2-主机名配置"><a href="#2-主机名配置" class="headerlink" title="2. 主机名配置"></a>2. 主机名配置</h2><p>用修改后的密码登录系统后，修改主机名，<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hostnamectl  <span class="built_in">set</span>-hostname  serverX.example.com      //X 是你的考试座位号，实验随意</div></pre></td></tr></table></figure></p>
+<p>Vim 修改 /etc/hostname 也是一样的效果，使用 <code>hostname</code> 命令查看是否修改成功。</p>
+<h2 id="3-基本网络配置"><a href="#3-基本网络配置" class="headerlink" title="3. 基本网络配置"></a>3. 基本网络配置</h2><p><code>ifconfig</code> 查看需要修改的网卡接口，用 vim 修改，<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">vim /etc/sysconfig/network-script/ifcfg-eth0     //根据实际情况替换 eth0</div><div class="line"><span class="comment">### 以下只列出需要修改的参数行</span></div><div class="line">BOOTPROTO=manual       //启动方式为手动，等同于 static</div><div class="line">IPADDR=192.168.0.150   //指定 IP 地址</div><div class="line">PREFIX=24              //掩码，NETMASK 也是一样的效果，看各自喜好</div><div class="line">GATEWAY=192.168.0.254  //网关</div><div class="line">ONBOOT=yes             //开机启用</div><div class="line">:wq</div><div class="line"></div><div class="line"><span class="comment">### wq保存后，重启网络</span></div><div class="line">systemctl restart network</div><div class="line"></div><div class="line"><span class="comment">### 添加 DNS</span></div><div class="line">vim /etc/resolv.conf</div><div class="line">nameserver 114.114.114.114  //考试一般指定为网关，实验环境任意</div><div class="line">:wq</div></pre></td></tr></table></figure></p>
+<h2 id="4-开启-SELinux"><a href="#4-开启-SELinux" class="headerlink" title="4. 开启 SELinux"></a>4. 开启 SELinux</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">getenforce               //查看当前 SELinux 状态，考试时 100% 是 permissive 状态，该状态下只产生警告日志信息</div><div class="line">setenforce 1             //临时修改为 enforcing 强制状态，免去重启系统</div><div class="line"></div><div class="line">vim /etc/selinux/config  //永久修改运行配置</div><div class="line">SELINUX=enforcing        //将 permissive 替换为 enforcing</div><div class="line">:wq</div></pre></td></tr></table></figure>
+<p>需要注意一点：<strong><code>/etc/selinux/config</code></strong> 和 <strong><code>/etc/sysconfig/selinux</code></strong> 都是 SELinux 的配置文件，修改任意一个，另一个自动同步。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="https://o72d43lc8.qnssl.com/image/jpg/qrcode.jpg" alt="欲淫兮 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>subscribe to my blog by scanning my public wechat account</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/RHCSA/" rel="tag">#RHCSA</a>
+          
+            <a href="/tags/RedHat/" rel="tag">#RedHat</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Linux/RedHat/certified/" rel="next" title="RadHat 7 认证系列教程——作者声明">
+                <i class="fa fa-chevron-left"></i> RadHat 7 认证系列教程——作者声明
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/科学上网/ssh-port-forwarding-accelerate-ss/" rel="prev" title="建立 SSH 隧道端口转发穿透内网加速 SS">
+                建立 SSH 隧道端口转发穿透内网加速 SS <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -465,6 +478,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="Linux/RedHat/rhcsa-1/"
+           data-title="RadHat 7 认证系列教程（1）——开机故障恢复" data-url="https://gootoo.top/Linux/RedHat/rhcsa-1/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -484,8 +505,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="https://o72d43lc8.qnssl.com/avatar.jpg"
@@ -566,6 +596,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-ROOT-密码破解"><span class="nav-number">1.</span> <span class="nav-text">1. ROOT 密码破解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-主机名配置"><span class="nav-number">2.</span> <span class="nav-text">2. 主机名配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-基本网络配置"><span class="nav-number">3.</span> <span class="nav-text">3. 基本网络配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-开启-SELinux"><span class="nav-number">4.</span> <span class="nav-text">4. 开启 SELinux</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -678,11 +719,9 @@
   
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
 
 
   

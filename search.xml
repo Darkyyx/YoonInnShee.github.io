@@ -4,19 +4,116 @@
   
     
     <entry>
-      <title><![CDATA[Hello World test]]></title>
-      <url>https://gootoo.top/testcate/testpermalink/</url>
-      <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+      <title><![CDATA[建立 SSH 隧道端口转发穿透内网加速 SS]]></title>
+      <url>https://gootoo.top/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/ssh-port-forwarding-accelerate-ss/</url>
+      <content type="html"><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>最近在网上找了个破解版的锐速装在我的 SS 服务器上，实测公司的电信 50M 专线可以看 YouTube 的 1080P 超清，但是到了家里，却只能看 480P 还略带点卡顿。在正文之前，先来看看为什么我的 200M 宽带速度没有公司 50M 专线快。</p>
+<p>中国电信目前有两张骨干网，163（AS4134）和 CN2（AS4809），普通用户及一般商业用户接入 163，大企业专线以及某些政府机构接入 CN2。现在，用你的脚想一想，哪个骨干网速度会更慢？当然是 163 啦，全国人民的流量都挤在那几个 163 的核心路由器上，尤其是晚上宅男们都下班了，你懂得。坑人的是，在家里你是不可能连得到 CN2 上的，之前上海电信的国际精品网，实质上就是你交钱，给你走 CN2 通道。</p>
 <a id="more"></a>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>行内代码<code>init 0</code></p>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+<p>用纳税人的钱建下一代网络，使用再交一笔钱，大国就是这样崛起的。不过现在国际精品网已经不对个人用户开放，专心服务企业和政府机构了。</p>
+<p>既然如此，找一个接入 CN2 的服务器转发我的流量，碰巧公司的网络走的就是 CN2（嘘~！）。</p>
+<h2 id="ssh-端口转发"><a href="#ssh-端口转发" class="headerlink" title="ssh 端口转发"></a>ssh 端口转发</h2><p>转发流量其实有很多实现方式，比如 iptables、sock5，但是都有个明显的缺点，这些都以服务端形式提供，而企业一般都是有防火墙的，你从外部主动访问的请求都会被无情 drop。最简单、最方便的既能转发流量、又能内网穿透的方法就是 ssh 端口转发了。</p>
+<p>ssh就不说了，是个 Unix\Linux 系统就有，ssh 端口转发主要分 3 种，本地转发、远程转发、动态转发。这里简单的说明一下：</p>
+<ul>
+<li>本地转发：client 向 server 发起连接，建立转发隧道，client 将指定端口流量转发到 server，server 将流量以指定端口发送至目的地址。</li>
+<li>远程转发：client 向 server 发起连接，建立转发隧道，server 将指定端口流量转发到 client，client 将流量以指定端口发送至目的地址。</li>
+<li>动态转发：client 向 server 发起连接，建立转发隧道，client 将指定端口流量转发到 server，server 将流量以原始端口发送至目的地址。</li>
+</ul>
+<p>下面放上我规划时画的拓扑图：<br><img src="https://o72d43lc8.qnssl.com/image/png/ssh-forward-ss.png" alt="ssh 转发拓扑图" title="ssh 转发拓扑图"></p>
+<p>显然需要使用远程转发来穿透内网。家里的路由器本身也相当于一台防火墙，但是不同于公司防火墙，你有权限在上面做 NAT 策略，让中转服务器能主动访问家里作代理的树莓派。</p>
+<h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 本地转发</span></div><div class="line">ssh -L &lt;<span class="built_in">local</span> port&gt;:&lt;remote host&gt;:&lt;remote port&gt; &lt;SSH hostname&gt;</div><div class="line"></div><div class="line"><span class="comment"># 远程转发</span></div><div class="line">ssh -R &lt;<span class="built_in">local</span> port&gt;:&lt;remote host&gt;:&lt;remote port&gt; &lt;SSH hostname&gt;</div><div class="line"></div><div class="line"><span class="comment"># 动态转发</span></div><div class="line">ssh -D &lt;<span class="built_in">local</span> port&gt; &lt;SSH Server&gt;</div></pre></td></tr></table></figure>
+<p>以上是基本用法，只适用两台主机间的转发规则，多主机转发的复杂情况，需要对命令做一些基本改造，结合拓扑图，实际命令则是：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh -gR *:port-x:IP-D:port-z -p port-y Domain-B</div></pre></td></tr></table></figure></p>
+<p><code>-g</code> 表示 ssh 建立的隧道可以被本机以外的设备使用，需要配合在代理端口前加入 <code>ip:</code> 使用，我用了 <code>*:</code> 代表所有设备都可以访问<br><code>-R</code> 代表远程端口转发<br><code>*:port-x</code> 隧道入口路牌，代表任意地址都可以使用 ssh server 建立的隧道代理<br><code>IP-D:port-z</code> 隧道终点，流量的最终去向<br><code>-p port-y Domain-B</code> 正常的 ssh 连接命令参数，我用了域名来代替家里的公网地址，因为路由器一重启地址就变了，配合 DDNS 就不用改动命令参数了（虽然我一般都是手动改解析= =！）</p>
+<p>还可以结合一些其他参数，比如：<br><code>-f</code> 后台运行<br><code>-N</code> 不发送命令，仅转发端口<br><code>-C</code> 压缩传输数据（消耗CPU资源）<br>有经过防火墙的，连接后最好执行一些定时显示内容的命令，避免 session 没有活动被防火墙强制关闭，比如 top、mpstat -P ALL 100 99999 等等。</p>
+<p>还有关键的一点，第一个转发流量的 server（本地、动态就是 ssh client，远程就是 ssh server）上需要修改<br><code>/etc/ssh/sshd_config</code>，将 <code>GatewayPorts no</code> 修改为 <code>yes</code>，然后重启 ssh 服务。</p>
+<h2 id="扶墙直上"><a href="#扶墙直上" class="headerlink" title="扶墙直上"></a>扶墙直上</h2><p>最后一步，修改 SS 的配置，服务器 IP 填 IP-A，端口 Port-X，就可以用公司的 CN2 专线来加速你的 SS 了。</p>
+<p>原本的 480P 现在已经进化成 1080P 了，还可以边看边快进一点也不卡，Google 搜索也是秒显示了。</p>
+<p>公司网络不是 CN2 的，可以买接入 CN2 线路的 VPS，不过价格会很比较贵，一分价钱一分货，光 50M 专线，一年就一百多万，可想而知咯。</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[RadHat 7 认证系列教程（1）——开机故障恢复]]></title>
+      <url>https://gootoo.top/Linux/RedHat/rhcsa-1/</url>
+      <content type="html"><![CDATA[<h2 id="1-ROOT-密码破解"><a href="#1-ROOT-密码破解" class="headerlink" title="1. ROOT 密码破解"></a>1. ROOT 密码破解</h2><p>破密码万年第一题，7 与之前的版本过程有点区别，涉及到 SELinux 部分。<br>首先在操作系统引导界面按任意键暂停启动，上下键选择需要启动的 grub 引导条目，按 “e” 编辑菜单，在内核命令行（linux16 那一行，倒数第二行）的结尾附加 <code>rd.break</code>，<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">linux16 /vmlinuz-3.10.0-327.el7.x86_64 root=/dev/Mapper/centos-root ro rd.lvm.lv=centos/root rd.lvm.lv=centos/swap rhgb quiet LANG=en_US.UTF-8 rd.break</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>按 <code>Ctrl</code> + <code>X</code> 执行引导，进入终端。（该参数表示中断 initramfs 向实际系统移交控制权）<br>此时，会显示 root shell，且实际系统的 root 文件系统会在 /sysroot 中以只读方式挂载，<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mount -o remount,rw /sysroot         //已读写方式重新挂载</div><div class="line">chroot /sysroot                      //将文件树的根切换为 sysroot</div><div class="line"><span class="built_in">echo</span> password | passwd --stdin root  //为root设置新密码，自行替换 password 字符</div></pre></td></tr></table></figure></p>
+<p>由于此时尚未启用 SELinux，因此任何创建的新文件都不会被分配 SELinux 上下文，有些工具（例如 passwd）的原理是先创建一个新文件，然后替换要编辑保存的文件，所以编辑密码后 /etc/shadow 文件将不再有上下文，重新使新文件获得标记的方法就是在根下面创建一个隐藏空文件 <code>autorelabel</code>，<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">touch /.autorelabel</div><div class="line"><span class="built_in">exit</span>    //第一次退出 sysroot 环境</div><div class="line"><span class="built_in">exit</span>    //第二次退出 initramfs 调试终端，自动重启</div></pre></td></tr></table></figure></p>
+<p>注意 <code>/.</code> 和 <code>./</code> 的区别。</p>
+<h2 id="2-主机名配置"><a href="#2-主机名配置" class="headerlink" title="2. 主机名配置"></a>2. 主机名配置</h2><p>用修改后的密码登录系统后，修改主机名，<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hostnamectl  <span class="built_in">set</span>-hostname  serverX.example.com      //X 是你的考试座位号，实验随意</div></pre></td></tr></table></figure></p>
+<p>Vim 修改 /etc/hostname 也是一样的效果，使用 <code>hostname</code> 命令查看是否修改成功。</p>
+<h2 id="3-基本网络配置"><a href="#3-基本网络配置" class="headerlink" title="3. 基本网络配置"></a>3. 基本网络配置</h2><p><code>ifconfig</code> 查看需要修改的网卡接口，用 vim 修改，<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">vim /etc/sysconfig/network-script/ifcfg-eth0     //根据实际情况替换 eth0</div><div class="line"><span class="comment">### 以下只列出需要修改的参数行</span></div><div class="line">BOOTPROTO=manual       //启动方式为手动，等同于 static</div><div class="line">IPADDR=192.168.0.150   //指定 IP 地址</div><div class="line">PREFIX=24              //掩码，NETMASK 也是一样的效果，看各自喜好</div><div class="line">GATEWAY=192.168.0.254  //网关</div><div class="line">ONBOOT=yes             //开机启用</div><div class="line">:wq</div><div class="line"></div><div class="line"><span class="comment">### wq保存后，重启网络</span></div><div class="line">systemctl restart network</div><div class="line"></div><div class="line"><span class="comment">### 添加 DNS</span></div><div class="line">vim /etc/resolv.conf</div><div class="line">nameserver 114.114.114.114  //考试一般指定为网关，实验环境任意</div><div class="line">:wq</div></pre></td></tr></table></figure></p>
+<h2 id="4-开启-SELinux"><a href="#4-开启-SELinux" class="headerlink" title="4. 开启 SELinux"></a>4. 开启 SELinux</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">getenforce               //查看当前 SELinux 状态，考试时 100% 是 permissive 状态，该状态下只产生警告日志信息</div><div class="line">setenforce 1             //临时修改为 enforcing 强制状态，免去重启系统</div><div class="line"></div><div class="line">vim /etc/selinux/config  //永久修改运行配置</div><div class="line">SELINUX=enforcing        //将 permissive 替换为 enforcing</div><div class="line">:wq</div></pre></td></tr></table></figure>
+<p>需要注意一点：<strong><code>/etc/selinux/config</code></strong> 和 <strong><code>/etc/sysconfig/selinux</code></strong> 都是 SELinux 的配置文件，修改任意一个，另一个自动同步。</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[RadHat 7 认证系列教程——作者声明]]></title>
+      <url>https://gootoo.top/Linux/RedHat/certified/</url>
+      <content type="html"><![CDATA[<h2 id="RedHat-认证体系"><a href="#RedHat-认证体系" class="headerlink" title="RedHat 认证体系"></a>RedHat 认证体系</h2><p>大名鼎鼎的 RedHat 就不介绍了，主要说明一下目前的认证体系：<br>基础：RHCSA（Red Hat Certified System Administrator），红帽认证系统管理员<br>进阶：RHCE（Red Hat Certified Engineer），红帽认证工程师<br>高级：RHCA（Red Hat Certified Architect），红帽认证架构师<br><a id="more"></a></p>
+<h2 id="版本说明"><a href="#版本说明" class="headerlink" title="版本说明"></a>版本说明</h2><p>本系列全部教程将只包含 RedHat 7 以上版本，不会涉及 6 及其以下版本。首先 6 的内容非常简单，网上已经有很多相同文章，我不会浪费大把时间做已经有人做过的工作，其次，我觉得任何 IT 行业的人。都应该本着学新不学旧的原则，来学习新东西，旧东西毕竟总归会淘汰的。</p>
+<h2 id="教程说明"><a href="#教程说明" class="headerlink" title="教程说明"></a>教程说明</h2><ol>
+<li>本系列教程内容主要按照考试内容进行编排，额外知识点将发布在另外分类的文章下面。</li>
+<li>本教程适用于已经有基础 Linux 操作的人员，诸如操作系统安装、Vim 使用等是不会在教程中体现的。</li>
+<li>若无特别声明，请不要随意关闭 SELinux 和 Firewall，认证考试这两项均要求全程开启。</li>
+<li>为了方便，文章将 vim 和文件内容放在一起显示，vim 第二行起既是文件内容（特殊地方会有文章注释，请忽略），以 :wq 结束。</li>
+</ol>
+<h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><ol>
+<li>RHCSA 部分只需要一个系统即可，RHCE 需要两个。本教程虚拟机使用 VMware Workstation，具体使用什么虚拟机，不影响实验内容。</li>
+<li>请尽量将虚拟机的网络连接改成桥接模式，因为这样可以更方便的用宿主机上的 SSH 客户端进行命令行操作。</li>
+<li>默认系统安装的包组选择应为 <code>Server with GUI</code>，无附加包选择，如果你不喜欢装桌面，则应选择 <code>Infrastructure Server</code>（比如博主我），建议安装桌面，因为部分内容使用桌面进行设置更简单。</li>
+<li>RedHat 和 CentOS 没有什么大区别，你使用哪个都不影响实验内容。</li>
+</ol>
+<h2 id="特别说明"><a href="#特别说明" class="headerlink" title="特别说明"></a>特别说明</h2><p>我尽量保证文章质量，所以会牺牲些许发布速度，如文章有部分错误，请在评论中指出，我会悉心接受。</p>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[科学上网平民钝器──Lantern]]></title>
+      <url>https://gootoo.top/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/lantern/</url>
+      <content type="html"><![CDATA[<h2 id="Lantern-介绍"><a href="#Lantern-介绍" class="headerlink" title="Lantern 介绍"></a>Lantern 介绍</h2><p>维基百科词条解释如下：</p>
+<blockquote>
+<p>蓝灯（Lantern）是一款用于突破网络审查的开源软件。<br>蓝灯的 CEO 和首席开发者亚当·菲斯克（Adam Fisk）是 LimeWire 和 LittleShoot 的前首席工程师。</p>
+</blockquote>
+<p>值得一提的是该工具 Google 是资助者之一，一种莫名的喜感，有木有~<br><a id="more"></a></p>
+<h2 id="原理机制"><a href="#原理机制" class="headerlink" title="原理机制"></a>原理机制</h2><p>现在 2.X 版本通过官方自有的服务器或者未封锁地区用户运行的 Lantern 来提供访问。</p>
+<p>这样中心化 + P2P 的结构，能够较大程度上避免被封锁，私人贡献的网络挂了，还有官方服务器，官方挂了还有更多的私人贡献网络。</p>
+<p>在本地方面，实现的是白名单模式，即 PAC (Proxy auto-config) 模式，Lantern 会首先检测你访问的内容是否属于封锁区域，如果不是，将自动将域名加入 pac 配置。要查看该文件，通过在浏览器输入 <code>http://127.0.0.1:16823/proxy_on.pac</code>，下载到本地，用你喜欢的文本编辑器打开就能看到第一行的 <code>var bypassDomains</code> 数组保存着你最近访问过的国内域名。</p>
+<p>接着在看后面的 <code>function FindProxyForURL()</code> 函数，<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (isPlainHostName(host) <span class="comment">// including localhost</span></div><div class="line">    || shExpMatch(host, <span class="string">"*.local"</span>)) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"DIRECT"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>该段检查域名是否是 <code>localhost</code> 或者是 <code>*.local</code> 域名，如果是，跳过代*理，<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (<span class="regexp">/^[0-9.]+$/</span>.test(host)) &#123;</div><div class="line">    <span class="keyword">if</span> (isInNet(host, <span class="string">"10.0.0.0"</span>, <span class="string">"255.0.0.0"</span>) ||</div><div class="line">    isInNet(host, <span class="string">"172.16.0.0"</span>,  <span class="string">"255.240.0.0"</span>) ||</div><div class="line">    isInNet(host, <span class="string">"192.168.0.0"</span>,  <span class="string">"255.255.0.0"</span>) ||</div><div class="line">    isInNet(host, <span class="string">"127.0.0.0"</span>, <span class="string">"255.255.255.0"</span>)) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"DIRECT"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>该段检查域名是否属于 C 类 IP 地址段，如果是，跳过代*理，<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (url.substring(<span class="number">0</span>, <span class="number">4</span>) != <span class="string">'http'</span> &amp;&amp; (url.substring(<span class="number">0</span>, <span class="number">2</span>) != <span class="string">'ws'</span>)) &#123;</div><div class="line">    <span class="keyword">return</span> <span class="string">"DIRECT"</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> d <span class="keyword">in</span> bypassDomains) &#123;</div><div class="line">    <span class="keyword">if</span> (host == bypassDomains[d]) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"DIRECT"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这一段可以看出，Lantern 只支持 <code>http(s)</code> 或者 <code>ws(s)</code> 协议，所以，FTP 等其他协议是不支持的，<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">FindProxyForURL</span>(<span class="params">url, host</span>) </span>&#123;</div><div class="line">    <span class="comment">//省略了上面的检测代码</span></div><div class="line">    <span class="keyword">return</span> <span class="string">"PROXY 127.0.0.1:8787; DIRECT"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>从总的函数体来看，需要科学上网的域名通过 <code>127.0.0.1:8787</code> 来进行代*理，如果代*理也无法访问，再进行直接连接。</p>
+<p>Lantern 与 SS 一样，是通过修改操作系统 Internet 属性中的局域网（LAN）设置，来进行代*理，如果有不支持使用系统代*理，只能手动配置的应用，在代*理地址设置填写 <code>127.0.0.1:8787</code> 就可以了。</p>
+<h2 id="安装使用"><a href="#安装使用" class="headerlink" title="安装使用"></a>安装使用</h2><p>你可以到 <a href="https://getlantern.org" title="Lantern" target="_blank" rel="external">Lantern官网地址</a> 进行下载，不过官方已经被墙，推荐平民百姓到 Github 上去下载，这是 Z*F 绝对不敢屏蔽的网站，<a href="https://github.com/getlantern/forum#%E8%93%9D%E7%81%AFlantern%E6%9C%80%E6%96%B0%E7%89%88%E6%9C%AC%E4%B8%8B%E8%BD%BD" title="下载蓝灯" target="_blank" rel="external">点击传送门前去下载</a>。</p>
+<p>支持的平台如下：</p>
+<ul>
+<li>Windows</li>
+<li>Mac OSX</li>
+<li>Android 4.1 以上</li>
+<li>Ubuntu（使用 deb 包管理的 Linux 发行版应该都能直接用）</li>
+<li>GNU/Linux、Unix 自己编译吧</li>
+</ul>
+<p>IOS 是个老大难，目前无法用，曲线方案如下：<br><s>笔记本开个共享 WiFi，iPhone 连上来。</s></p>
+<p>安装完成后，浏览器将自动打开 <code>http://127.0.0.1:16823</code> 页面，无需任何配置即可科学上网，任务栏右下角有蓝灯小图标就表示已经开启。<br>点击右下角小齿轮进行设置，默认自动开机启动，不代理全部流量，匿名提交统计信息，管理系统代理，可根据需要自行变动。</p>
+<h2 id="安全风险"><a href="#安全风险" class="headerlink" title="安全风险"></a>安全风险</h2><p>Lantern 全程加密被封锁的网站，但如果网站没被封锁，Lantern 不会对其做任何改动。这意味着一个网络上的窥探者，比如政*府的审查部门或者 ISP，没办法看到你访问被封锁网站时的具体内容。那些提供访问点的 Lantern 用户能看到你访问的网站，以及你来自哪里。但他们也看不到具体的内容，因为内容是经过 HTTPS 加密的。</p>
+<p>个人用户用谷歌搜索一些资料，或者刷刷那些不存在的社交网站没什么大问题，https 足够保护你。但如果你是企业用户，或者你需要在线提交一些敏感信息的，还是不推荐使用，保不准哪天 https 又爆出超级大漏洞，或者某些别有用心之人掌握了 https 的隐匿漏洞。</p>
+<h2 id="个人评价"><a href="#个人评价" class="headerlink" title="个人评价"></a>个人评价</h2><ol>
+<li>使用超级方便，适合小白用户。</li>
+<li>无技术要求，无成本要求，适合低保用户。</li>
+<li>开源，代码托管 Github，源码安全性可以审查。</li>
+<li>上海 200M 光纤用户表示速度能接受，YouTube 卡顿。</li>
+<li>企业的专线网络速度可媲美 SS，YouTube 稳定 480P。（企业的专线网络走海底光缆的 VIP 通道，访问海外内容速度更快）</li>
+<li>底层还是 http 协议代理，两*会期间可能还是会被屏蔽，具体我也要到开会的时候才能测试。</li>
+<li>私人节点存在安全风险。</li>
+</ol>
+<p>基于以上特点，我给的定性是“钝器”，而不是“利器”。想架 SS 但没 VISA 信用卡买 VPS 的用户，可以尝试下，毕竟你用公共版 SS 地址，也一样有隐私窃听风险。</p>
+<h2 id="免责条款"><a href="#免责条款" class="headerlink" title="免责条款"></a>免责条款</h2><p>使用该工具时，请注意以下三点：</p>
+<ul>
+<li>您了解国家安全的重要性，并保证不会从事任何包括但不限于有关反动、反华、带有分裂企图或煽动性或颠覆性的境内外非法活动；</li>
+<li>您保证不会做出其它任何违反当地法律法规的行为，包括但不限于各种涉嫌诈骗、隐匿罪证、诋毁或破坏公共安全的行为；</li>
+<li>在您告知他人时，也须他人对这三点作出承诺。</li>
+</ul>
 ]]></content>
     </entry>
     
