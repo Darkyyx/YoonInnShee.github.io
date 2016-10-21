@@ -311,8 +311,8 @@
             
               
                 
-                <a class="post-title-link" href="/Linux/elementaryOS/switch-to-eos/" itemprop="url">
-                  Linux 桌面系统迁移记录
+                <a class="post-title-link" href="/Linux/elementaryOS/personal-workstation-switch-to-eos/" itemprop="url">
+                  个人工作站操作系统迁移
                 </a>
               
             
@@ -367,8 +367,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/Linux/elementaryOS/switch-to-eos/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="Linux/elementaryOS/switch-to-eos/" itemprop="commentsCount"></span>
+                <a href="/Linux/elementaryOS/personal-workstation-switch-to-eos/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="Linux/elementaryOS/personal-workstation-switch-to-eos/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -378,7 +378,7 @@
 
           
           
-             <span id="/Linux/elementaryOS/switch-to-eos/" class="leancloud_visitors" data-flag-title="Linux 桌面系统迁移记录">
+             <span id="/Linux/elementaryOS/personal-workstation-switch-to-eos/" class="leancloud_visitors" data-flag-title="个人工作站操作系统迁移">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -401,34 +401,14 @@
 
       
         
-          
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>两月没更新博客了，怎么说呢，我是懒癌晚期绝症患者……<br>其实新文章一直在写的呢，只是没有放上来而已。<del>不要被他骗了，其实只写了一篇！还没完工！</del></p>
-<p>大家都知道 9 月份《军团再临》开了，我作为艾泽拉斯的勇士，理应站在战争的前线，再加上其他一大堆旁人不能理解的原因，我又开始沉迷魔兽世界了，沉迷到怎么个地步呢，上班偷偷玩一整天，下班玩一晚上，休息玩一整天，闲暇时刻全都被用来逛 NGA 研究职业数据。<del>For the Horde!For Azeroth!</del></p>
-<p>这也不是第一次沉迷，我非常清楚这样继续下去的后果，因为上一次就导致了整整两个学期大面积挂科，<del>沉迷也是原因的，我才不会告诉你们为什么呢，哼</del>，所以呢，国庆期间，我一个人开车跑到非常远的地方，体验了一下人山人海，车水马龙，对自己进行强制行为矫正，<del>说那么复杂干什么，不就是强迫不玩么</del>，哈？有多远？上海→重庆→杭州→上海，3800 公里+……</p>
-<p>事实证明效果拔群，回来后就没在登录过 WOW。</p>
-<p>更进一步呢，决定把私人工作平台迁移到 linux 上，一来彻底杜绝此类危机事件的发生，二来本身工作内容就是 linux 相关，很多东西确实直接在 linux 上做更方便，比如 bash 脚本调试，三来，我最近一直尝试对生活内容进行一些大胆改变，这是其中一环。</p>
-<hr>
-<h2 id="1-发行版选型"><a href="#1-发行版选型" class="headerlink" title="1. 发行版选型"></a>1. 发行版选型</h2><p>重装操作系统是一回事，换系统平台是另一码事，Windows 只要装家庭版/专业版然后破解就成，Linux 需要在众多发行版中选择一款，当中涉及到内核版本、包管理器、桌面环境、社区活跃度等等。</p>
-<p>一般来说，大众选择是这样的：</p>
-<ul>
-<li>RPM 系<ul>
-<li>Fedora</li>
-</ul>
-</li>
-<li>DEB 系<ul>
-<li>Debian</li>
-<li>Ubuntu</li>
-<li>Mint</li>
-</ul>
-</li>
-<li>TAR 系<ul>
-<li>Arch</li>
-</ul>
-</li>
-</ul>
-<p>生产环境中一般都是 RHEL/CentOS，和 Fedora 都是 RPM 系，我也对此系最熟悉，只可惜，Fedora 一直只提供双轨镜像的 ISO，写 U 盘总是有一堆莫名其妙的问题，UltraISO 用 RAW 模式刻录安装出错，VMware 开虚拟机光盘挂载</p>
-
-          
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>两月没更新博客了，怎么说呢，这期间发生了很多事……<br>其实新文章一直在写的呢，只是没有放上来而已。<del>不要被他骗了，其实只写了一篇！还没完工！</del></p>
+<p>大家都知道 9 月份《军团再临》开了，我作为艾泽拉斯的勇士，理应站在战争的前线！<del>所以这就是你上班偷偷玩一整天，下班玩到两三点，休息日肝一整天的原因？</del></p>
+<p>国庆节强制脱离了游戏，所以现在又有时间折腾了。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/Linux/elementaryOS/personal-workstation-switch-to-eos/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -554,8 +534,10 @@
 
       
         
-          <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>最近在网上找了个破解版的锐速装在我的 SS 服务器上，实测公司的电信 50M 专线可以看 YouTube 的 1080P 超清，但是到了家里，却只能看 480P 还略带点卡顿。在正文之前，先来看看为什么我的 200M 宽带速度没有公司 50M 专线快。</p>
-<p>中国电信目前有两张骨干网，163（AS4134）和 CN2（AS4809），普通用户及一般商业用户接入 163，大企业专线以及某些政府机构接入 CN2。现在，用你的脚想一想，哪个骨干网速度会更慢？当然是 163 啦，全国人民的流量都挤在那几个 163 的核心路由器上，尤其是晚上宅男们都下班了，你懂得。坑人的是，在家里你是不可能连得到 CN2 上的，之前上海电信的国际精品网，实质上就是你交钱，给你走 CN2 通道。</p>
+          <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>最近在网上找了个破解版的锐速装在我的 SS 服务器上，实测公司的电信 50M 专线可以看 YouTube 的 1080P 超清，但是到了家里，却只能看 480P 还略带点卡顿。所以呢，先来研究研究为什么我的 200M 宽带速度没有公司 50M 专线快。</p>
+<p>中国电信目前有两张骨干网，163（AS4134）和 CN2（AS4809），普通用户及一般商业用户接入 163，大企业专线以及某些政府机构接入 CN2。现在，用你的脚想一想，哪个骨干网速度会更慢？当然是 163 啦，全国人民的流量都挤在那几个 163 的核心路由器上，尤其是晚上宅男们都下班了，你懂得。之前上海电信搞的国际精品网，实质上就是你交钱，给你走 CN2 通道。</p>
+<p>用纳税人的钱建下一代网络，你要用再交一笔钱，大国就是这样崛起的。不过现在国际精品网已经不对个人用户开放，专心服务企业和政府机构了。</p>
+<p>既然如此，找一个接入 CN2 的服务器转发我的流量，岂不是能加速我的 SS？！真巧，公司的专线走的就是 CN2（嘘~！）。</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/fuckgfw/ssh-port-forwarding-accelerate-ss/#more" rel="contents">
               阅读全文 &raquo;
@@ -841,7 +823,7 @@
 
       
         
-          <h2 id="RedHat-认证体系"><a href="#RedHat-认证体系" class="headerlink" title="RedHat 认证体系"></a>RedHat 认证体系</h2><p>简介一下目前的认证体系：<br>基础：RHCSA（Red Hat Certified System Administrator），红帽认证系统管理员<br>进阶：RHCE（Red Hat Certified Engineer），红帽认证工程师<br>高级：RHCA（Red Hat Certified Architect），红帽认证架构师<br>
+          <h2 id="RedHat-认证体系"><a href="#RedHat-认证体系" class="headerlink" title="RedHat 认证体系"></a>RedHat 认证体系</h2><p>简介一下目前的认证体系：<br>基础：RHCSA（Red Hat Certified System Administrator），红帽认证系统管理员<br>进阶：RHCE（Red Hat Certified Engineer），红帽认证工程师<br>高级：RHCA（Red Hat Certified Architect），红帽认证架构师</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/Linux/RedHat/certified/#more" rel="contents">
               阅读全文 &raquo;
@@ -972,11 +954,7 @@
 
       
         
-          <h2 id="Lantern-介绍"><a href="#Lantern-介绍" class="headerlink" title="Lantern 介绍"></a>Lantern 介绍</h2><p>维基百科词条解释如下：</p>
-<blockquote>
-<p>蓝灯（Lantern）是一款用于突破网络审查的开源软件。</p>
-</blockquote>
-<p>值得一提的是该工具 Google 是资助者之一，一种莫名的喜感，有木有~<br>
+          <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>入门级番羽土啬工具，无需多言。<br>值得一提的是 Google 曾经资助过开发，一种莫名的喜感，有木有~</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/fuckgfw/lantern/#more" rel="contents">
               阅读全文 &raquo;

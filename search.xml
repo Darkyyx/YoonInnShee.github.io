@@ -4,44 +4,29 @@
   
     
     <entry>
-      <title><![CDATA[Linux 桌面系统迁移记录]]></title>
-      <url>http://gootoo.top/Linux/elementaryOS/switch-to-eos/</url>
-      <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>两月没更新博客了，怎么说呢，我是懒癌晚期绝症患者……<br>其实新文章一直在写的呢，只是没有放上来而已。<del>不要被他骗了，其实只写了一篇！还没完工！</del></p>
-<p>大家都知道 9 月份《军团再临》开了，我作为艾泽拉斯的勇士，理应站在战争的前线，再加上其他一大堆旁人不能理解的原因，我又开始沉迷魔兽世界了，沉迷到怎么个地步呢，上班偷偷玩一整天，下班玩一晚上，休息玩一整天，闲暇时刻全都被用来逛 NGA 研究职业数据。<del>For the Horde!For Azeroth!</del></p>
-<p>这也不是第一次沉迷，我非常清楚这样继续下去的后果，因为上一次就导致了整整两个学期大面积挂科，<del>沉迷也是原因的，我才不会告诉你们为什么呢，哼</del>，所以呢，国庆期间，我一个人开车跑到非常远的地方，体验了一下人山人海，车水马龙，对自己进行强制行为矫正，<del>说那么复杂干什么，不就是强迫不玩么</del>，哈？有多远？上海→重庆→杭州→上海，3800 公里+……</p>
-<p>事实证明效果拔群，回来后就没在登录过 WOW。</p>
-<p>更进一步呢，决定把私人工作平台迁移到 linux 上，一来彻底杜绝此类危机事件的发生，二来本身工作内容就是 linux 相关，很多东西确实直接在 linux 上做更方便，比如 bash 脚本调试，三来，我最近一直尝试对生活内容进行一些大胆改变，这是其中一环。</p>
+      <title><![CDATA[个人工作站操作系统迁移]]></title>
+      <url>http://gootoo.top/Linux/elementaryOS/personal-workstation-switch-to-eos/</url>
+      <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>两月没更新博客了，怎么说呢，这期间发生了很多事……<br>其实新文章一直在写的呢，只是没有放上来而已。<del>不要被他骗了，其实只写了一篇！还没完工！</del></p>
+<p>大家都知道 9 月份《军团再临》开了，我作为艾泽拉斯的勇士，理应站在战争的前线！<del>所以这就是你上班偷偷玩一整天，下班玩到两三点，休息日肝一整天的原因？</del></p>
+<p>国庆节强制脱离了游戏，所以现在又有时间折腾了。</p>
+<a id="more"></a>
 <hr>
-<h2 id="1-发行版选型"><a href="#1-发行版选型" class="headerlink" title="1. 发行版选型"></a>1. 发行版选型</h2><p>重装操作系统是一回事，换系统平台是另一码事，Windows 只要装家庭版/专业版然后破解就成，Linux 需要在众多发行版中选择一款，当中涉及到内核版本、包管理器、桌面环境、社区活跃度等等。</p>
-<p>一般来说，大众选择是这样的：</p>
-<ul>
-<li>RPM 系<ul>
-<li>Fedora</li>
-</ul>
-</li>
-<li>DEB 系<ul>
-<li>Debian</li>
-<li>Ubuntu</li>
-<li>Mint</li>
-</ul>
-</li>
-<li>TAR 系<ul>
-<li>Arch</li>
-</ul>
-</li>
-</ul>
-<p>生产环境中一般都是 RHEL/CentOS，和 Fedora 都是 RPM 系，我也对此系最熟悉，只可惜，Fedora 一直只提供双轨镜像的 ISO，写 U 盘总是有一堆莫名其妙的问题，UltraISO 用 RAW 模式刻录安装出错，VMware 开虚拟机光盘挂载</p>
+<h2 id="1-发行版选择"><a href="#1-发行版选择" class="headerlink" title="1. 发行版选择"></a>1. 发行版选择</h2><p>生产里用的基本上都是 RHEL/CentOS，工作原因对 RPM 系的系统结构的最熟悉，SO，同是 RPM 系的 Fedora 成了第一选择，但坑爹的是 Fedora 只提供双轨镜像的 ISO，写 U 盘总是有一堆莫名其妙的问题，UltraISO 用 RAW 模式刻录安装也出错，VMware 开虚拟机光盘挂载他么的也校验出错，懒得刻光盘，就直接放弃了。</p>
+<p>第二选择 Arch，滚动发行，高度自定义，完整的文档，是个优秀的发行版，我折腾了两天，装了一切必备的东西，GNOME 各种 tweak，但最后还是死在了显卡驱动上，懒得再折腾，也放弃了。但如果下次要换发行版，Arch 绝对是第一次选择，因为我不会再买带独立显卡的电脑了！</p>
+<p>第三集团是 DEB 系，Ubuntu 给我的感觉像是一个山寨机，对设计出这种界面的设计师的审美我表示很同情。相比之下，Debian 就好多了，虽然和 Fedora 一样用的 GNOME 3 默认界面，但是我觉得这种简单、不亮瞎眼的设计很优雅，没人会不喜欢优雅，但不是所有人都喜欢山寨机，<del>说的这么好，为什么不选 Debian</del>，因为有更加漂亮的！</p>
+<p>最终选择，elementaryOS，Ubuntu 的衍生，设计师主导，全世界最漂亮的发行版。作为一个工程师，技术上我可以自己搞定，美化的工作就交给设计师去做就好。<del>如果够勤快，早用 Fedora 了</del>。默认桌面就美的一笔，和 Mac 很像，我认为可以秒杀任何一款除 Mac 以外的系统桌面。</p>
+<p>未完待续……</p>
 ]]></content>
     </entry>
     
     <entry>
       <title><![CDATA[建立 SSH 隧道端口转发穿透内网加速 SS]]></title>
       <url>http://gootoo.top/fuckgfw/ssh-port-forwarding-accelerate-ss/</url>
-      <content type="html"><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>最近在网上找了个破解版的锐速装在我的 SS 服务器上，实测公司的电信 50M 专线可以看 YouTube 的 1080P 超清，但是到了家里，却只能看 480P 还略带点卡顿。在正文之前，先来看看为什么我的 200M 宽带速度没有公司 50M 专线快。</p>
-<p>中国电信目前有两张骨干网，163（AS4134）和 CN2（AS4809），普通用户及一般商业用户接入 163，大企业专线以及某些政府机构接入 CN2。现在，用你的脚想一想，哪个骨干网速度会更慢？当然是 163 啦，全国人民的流量都挤在那几个 163 的核心路由器上，尤其是晚上宅男们都下班了，你懂得。坑人的是，在家里你是不可能连得到 CN2 上的，之前上海电信的国际精品网，实质上就是你交钱，给你走 CN2 通道。</p>
+      <content type="html"><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>最近在网上找了个破解版的锐速装在我的 SS 服务器上，实测公司的电信 50M 专线可以看 YouTube 的 1080P 超清，但是到了家里，却只能看 480P 还略带点卡顿。所以呢，先来研究研究为什么我的 200M 宽带速度没有公司 50M 专线快。</p>
+<p>中国电信目前有两张骨干网，163（AS4134）和 CN2（AS4809），普通用户及一般商业用户接入 163，大企业专线以及某些政府机构接入 CN2。现在，用你的脚想一想，哪个骨干网速度会更慢？当然是 163 啦，全国人民的流量都挤在那几个 163 的核心路由器上，尤其是晚上宅男们都下班了，你懂得。之前上海电信搞的国际精品网，实质上就是你交钱，给你走 CN2 通道。</p>
+<p>用纳税人的钱建下一代网络，你要用再交一笔钱，大国就是这样崛起的。不过现在国际精品网已经不对个人用户开放，专心服务企业和政府机构了。</p>
+<p>既然如此，找一个接入 CN2 的服务器转发我的流量，岂不是能加速我的 SS？！真巧，公司的专线走的就是 CN2（嘘~！）。</p>
 <a id="more"></a>
-<p>用纳税人的钱建下一代网络，使用再交一笔钱，大国就是这样崛起的。不过现在国际精品网已经不对个人用户开放，专心服务企业和政府机构了。</p>
-<p>既然如此，找一个接入 CN2 的服务器转发我的流量，碰巧公司的网络走的就是 CN2（嘘~！）。</p>
 <h2 id="ssh-端口转发"><a href="#ssh-端口转发" class="headerlink" title="ssh 端口转发"></a>ssh 端口转发</h2><p>转发流量其实有很多实现方式，比如 iptables、sock5，但是都有个明显的缺点，这些都以服务端形式提供，而企业一般都是有防火墙的，你从外部主动访问的请求都会被无情 drop。最简单、最方便的既能转发流量、又能内网穿透的方法就是 ssh 端口转发了。</p>
 <p>ssh就不说了，是个 Unix\Linux 系统就有，ssh 端口转发主要分 3 种，本地转发、远程转发、动态转发。这里简单的说明一下：</p>
 <ul>
@@ -81,7 +66,8 @@
     <entry>
       <title><![CDATA[RadHat 7 认证系列教程——作者声明]]></title>
       <url>http://gootoo.top/Linux/RedHat/certified/</url>
-      <content type="html"><![CDATA[<h2 id="RedHat-认证体系"><a href="#RedHat-认证体系" class="headerlink" title="RedHat 认证体系"></a>RedHat 认证体系</h2><p>简介一下目前的认证体系：<br>基础：RHCSA（Red Hat Certified System Administrator），红帽认证系统管理员<br>进阶：RHCE（Red Hat Certified Engineer），红帽认证工程师<br>高级：RHCA（Red Hat Certified Architect），红帽认证架构师<br><a id="more"></a></p>
+      <content type="html"><![CDATA[<h2 id="RedHat-认证体系"><a href="#RedHat-认证体系" class="headerlink" title="RedHat 认证体系"></a>RedHat 认证体系</h2><p>简介一下目前的认证体系：<br>基础：RHCSA（Red Hat Certified System Administrator），红帽认证系统管理员<br>进阶：RHCE（Red Hat Certified Engineer），红帽认证工程师<br>高级：RHCA（Red Hat Certified Architect），红帽认证架构师</p>
+<a id="more"></a>
 <h2 id="版本说明"><a href="#版本说明" class="headerlink" title="版本说明"></a>版本说明</h2><p>本系列全部教程将只包含 RedHat 7 版本，不会涉及 6 及其以下版本。首先 6 的内容非常简单，网上已经有很多相同文章，其次，任何 IT 行业的人。都应该本着学新不学旧的原则，来学习新东西，旧东西毕竟总归会淘汰的。</p>
 <h2 id="教程说明"><a href="#教程说明" class="headerlink" title="教程说明"></a>教程说明</h2><ol>
 <li>本系列教程内容主要按照考试内容进行编排，额外内容将额外起草，并注明标识。</li>
@@ -100,11 +86,8 @@
     <entry>
       <title><![CDATA[科学上网平民钝器──Lantern]]></title>
       <url>http://gootoo.top/fuckgfw/lantern/</url>
-      <content type="html"><![CDATA[<h2 id="Lantern-介绍"><a href="#Lantern-介绍" class="headerlink" title="Lantern 介绍"></a>Lantern 介绍</h2><p>维基百科词条解释如下：</p>
-<blockquote>
-<p>蓝灯（Lantern）是一款用于突破网络审查的开源软件。</p>
-</blockquote>
-<p>值得一提的是该工具 Google 是资助者之一，一种莫名的喜感，有木有~<br><a id="more"></a></p>
+      <content type="html"><![CDATA[<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>入门级番羽土啬工具，无需多言。<br>值得一提的是 Google 曾经资助过开发，一种莫名的喜感，有木有~</p>
+<a id="more"></a>
 <h2 id="原理机制"><a href="#原理机制" class="headerlink" title="原理机制"></a>原理机制</h2><p>现在 2.X 版本通过官方自有的服务器或者未封锁地区用户运行的 Lantern 来提供访问。</p>
 <p>这样中心化 + P2P 的结构，能够较大程度上避免被封锁，私人贡献的网络挂了，还有官方服务器，官方挂了还有更多的私人贡献网络。</p>
 <p>在本地方面，实现的是白名单模式，即 PAC (Proxy auto-config) 模式，Lantern 会首先检测你访问的内容是否属于封锁区域，如果不是，将自动将域名加入 pac 配置。要查看该文件，通过在浏览器输入 <code>http://127.0.0.1:16823/proxy_on.pac</code>，下载到本地，用你喜欢的文本编辑器打开就能看到第一行的 <code>var bypassDomains</code> 数组保存着你最近访问过的国内域名。</p>

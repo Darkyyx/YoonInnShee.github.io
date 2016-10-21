@@ -108,19 +108,19 @@
 
 
 
-<meta name="description" content="概述最近在网上找了个破解版的锐速装在我的 SS 服务器上，实测公司的电信 50M 专线可以看 YouTube 的 1080P 超清，但是到了家里，却只能看 480P 还略带点卡顿。在正文之前，先来看看为什么我的 200M 宽带速度没有公司 50M 专线快。
+<meta name="description" content="概述最近在网上找了个破解版的锐速装在我的 SS 服务器上，实测公司的电信 50M 专线可以看 YouTube 的 1080P 超清，但是到了家里，却只能看 480P 还略带点卡顿。所以呢，先来研究研究为什么我的 200M 宽带速度没有公司 50M 专线快。
 中国电信目前有两张骨干网，163（AS4134）和 CN2（AS4809），普通用户及一般商业用户接入 163，大企业专线以及某些政府机构接入">
 <meta property="og:type" content="article">
 <meta property="og:title" content="建立 SSH 隧道端口转发穿透内网加速 SS">
 <meta property="og:url" content="http://gootoo.top/fuckgfw/ssh-port-forwarding-accelerate-ss/index.html">
 <meta property="og:site_name" content="YoonInnShee">
-<meta property="og:description" content="概述最近在网上找了个破解版的锐速装在我的 SS 服务器上，实测公司的电信 50M 专线可以看 YouTube 的 1080P 超清，但是到了家里，却只能看 480P 还略带点卡顿。在正文之前，先来看看为什么我的 200M 宽带速度没有公司 50M 专线快。
+<meta property="og:description" content="概述最近在网上找了个破解版的锐速装在我的 SS 服务器上，实测公司的电信 50M 专线可以看 YouTube 的 1080P 超清，但是到了家里，却只能看 480P 还略带点卡顿。所以呢，先来研究研究为什么我的 200M 宽带速度没有公司 50M 专线快。
 中国电信目前有两张骨干网，163（AS4134）和 CN2（AS4809），普通用户及一般商业用户接入 163，大企业专线以及某些政府机构接入">
 <meta property="og:image" content="https://o72d43lc8.qnssl.com/image/png/ssh-forward-ss.png">
-<meta property="og:updated_time" content="2016-10-14T17:51:24.688Z">
+<meta property="og:updated_time" content="2016-10-21T17:14:15.934Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="建立 SSH 隧道端口转发穿透内网加速 SS">
-<meta name="twitter:description" content="概述最近在网上找了个破解版的锐速装在我的 SS 服务器上，实测公司的电信 50M 专线可以看 YouTube 的 1080P 超清，但是到了家里，却只能看 480P 还略带点卡顿。在正文之前，先来看看为什么我的 200M 宽带速度没有公司 50M 专线快。
+<meta name="twitter:description" content="概述最近在网上找了个破解版的锐速装在我的 SS 服务器上，实测公司的电信 50M 专线可以看 YouTube 的 1080P 超清，但是到了家里，却只能看 480P 还略带点卡顿。所以呢，先来研究研究为什么我的 200M 宽带速度没有公司 50M 专线快。
 中国电信目前有两张骨干网，163（AS4134）和 CN2（AS4809），普通用户及一般商业用户接入 163，大企业专线以及某些政府机构接入">
 <meta name="twitter:image" content="https://o72d43lc8.qnssl.com/image/png/ssh-forward-ss.png">
 
@@ -389,11 +389,11 @@
       
 
       
-        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>最近在网上找了个破解版的锐速装在我的 SS 服务器上，实测公司的电信 50M 专线可以看 YouTube 的 1080P 超清，但是到了家里，却只能看 480P 还略带点卡顿。在正文之前，先来看看为什么我的 200M 宽带速度没有公司 50M 专线快。</p>
-<p>中国电信目前有两张骨干网，163（AS4134）和 CN2（AS4809），普通用户及一般商业用户接入 163，大企业专线以及某些政府机构接入 CN2。现在，用你的脚想一想，哪个骨干网速度会更慢？当然是 163 啦，全国人民的流量都挤在那几个 163 的核心路由器上，尤其是晚上宅男们都下班了，你懂得。坑人的是，在家里你是不可能连得到 CN2 上的，之前上海电信的国际精品网，实质上就是你交钱，给你走 CN2 通道。</p>
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>最近在网上找了个破解版的锐速装在我的 SS 服务器上，实测公司的电信 50M 专线可以看 YouTube 的 1080P 超清，但是到了家里，却只能看 480P 还略带点卡顿。所以呢，先来研究研究为什么我的 200M 宽带速度没有公司 50M 专线快。</p>
+<p>中国电信目前有两张骨干网，163（AS4134）和 CN2（AS4809），普通用户及一般商业用户接入 163，大企业专线以及某些政府机构接入 CN2。现在，用你的脚想一想，哪个骨干网速度会更慢？当然是 163 啦，全国人民的流量都挤在那几个 163 的核心路由器上，尤其是晚上宅男们都下班了，你懂得。之前上海电信搞的国际精品网，实质上就是你交钱，给你走 CN2 通道。</p>
+<p>用纳税人的钱建下一代网络，你要用再交一笔钱，大国就是这样崛起的。不过现在国际精品网已经不对个人用户开放，专心服务企业和政府机构了。</p>
+<p>既然如此，找一个接入 CN2 的服务器转发我的流量，岂不是能加速我的 SS？！真巧，公司的专线走的就是 CN2（嘘~！）。</p>
 <a id="more"></a>
-<p>用纳税人的钱建下一代网络，使用再交一笔钱，大国就是这样崛起的。不过现在国际精品网已经不对个人用户开放，专心服务企业和政府机构了。</p>
-<p>既然如此，找一个接入 CN2 的服务器转发我的流量，碰巧公司的网络走的就是 CN2（嘘~！）。</p>
 <h2 id="ssh-端口转发"><a href="#ssh-端口转发" class="headerlink" title="ssh 端口转发"></a>ssh 端口转发</h2><p>转发流量其实有很多实现方式，比如 iptables、sock5，但是都有个明显的缺点，这些都以服务端形式提供，而企业一般都是有防火墙的，你从外部主动访问的请求都会被无情 drop。最简单、最方便的既能转发流量、又能内网穿透的方法就是 ssh 端口转发了。</p>
 <p>ssh就不说了，是个 Unix\Linux 系统就有，ssh 端口转发主要分 3 种，本地转发、远程转发、动态转发。这里简单的说明一下：</p>
 <ul>
@@ -418,11 +418,6 @@
     <div>
       
         
-<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
-    <img id="wechat_subscriber_qcode" src="https://o72d43lc8.qnssl.com/image/jpg/qrcode.jpg" alt="YoonInnShee wechat" style="width: 200px; max-width: 100%;"/>
-    <div>扫一扫，关注我的微信个人公众账号</div>
-</div>
-
 
       
     </div>
@@ -459,8 +454,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/Linux/elementaryOS/switch-to-eos/" rel="prev" title="Linux 桌面系统迁移记录">
-                Linux 桌面系统迁移记录 <i class="fa fa-chevron-right"></i>
+              <a href="/Linux/elementaryOS/personal-workstation-switch-to-eos/" rel="prev" title="个人工作站操作系统迁移">
+                个人工作站操作系统迁移 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
