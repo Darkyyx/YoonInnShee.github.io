@@ -5,7 +5,7 @@
     
     <entry>
       <title><![CDATA[个人工作站操作系统迁移]]></title>
-      <url>http://gootoo.top/Linux/elementaryOS/personal-workstation-switch-to-eos/</url>
+      <url>https://gootoo.top/Linux/elementaryOS/personal-workstation-switch-to-eos/</url>
       <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>两月没更新博客了，怎么说呢，这期间发生了很多事……<br>其实新文章一直在写的呢，只是没有放上来而已。<del>不要被他骗了，其实只写了一篇！还没完工！</del></p>
 <p>大家都知道 9 月份《军团再临》开了，我作为艾泽拉斯的勇士，理应站在战争的前线！<del>所以这就是你上班偷偷玩一整天，下班玩到两三点，休息日肝一整天的原因？</del></p>
 <p>国庆节强制脱离了游戏，所以现在又有时间折腾了。</p>
@@ -21,7 +21,7 @@
     
     <entry>
       <title><![CDATA[建立 SSH 隧道端口转发穿透内网加速 SS]]></title>
-      <url>http://gootoo.top/fuckgfw/ssh-port-forwarding-accelerate-ss/</url>
+      <url>https://gootoo.top/fuckgfw/ssh-port-forwarding-accelerate-ss/</url>
       <content type="html"><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>最近在网上找了个破解版的锐速装在我的 SS 服务器上，实测公司的电信 50M 专线可以看 YouTube 的 1080P 超清，但是到了家里，却只能看 480P 还略带点卡顿。所以呢，先来研究研究为什么我的 200M 宽带速度没有公司 50M 专线快。</p>
 <p>中国电信目前有两张骨干网，163（AS4134）和 CN2（AS4809），普通用户及一般商业用户接入 163，大企业专线以及某些政府机构接入 CN2。现在，用你的脚想一想，哪个骨干网速度会更慢？当然是 163 啦，全国人民的流量都挤在那几个 163 的核心路由器上，尤其是晚上宅男们都下班了，你懂得。之前上海电信搞的国际精品网，实质上就是你交钱，给你走 CN2 通道。</p>
 <p>用纳税人的钱建下一代网络，你要用再交一笔钱，大国就是这样崛起的。不过现在国际精品网已经不对个人用户开放，专心服务企业和政府机构了。</p>
@@ -49,7 +49,7 @@
     
     <entry>
       <title><![CDATA[RadHat 7 认证系列教程（1）——开机故障恢复]]></title>
-      <url>http://gootoo.top/Linux/RedHat/rhcsa-1/</url>
+      <url>https://gootoo.top/Linux/RedHat/rhcsa-1/</url>
       <content type="html"><![CDATA[<h2 id="1-ROOT-密码破解"><a href="#1-ROOT-密码破解" class="headerlink" title="1. ROOT 密码破解"></a>1. ROOT 密码破解</h2><p>破密码万年第一题，7 与之前的版本过程有点区别，涉及到 SELinux 部分。<br>首先在操作系统引导界面按任意键暂停启动，上下键选择需要启动的 grub 引导条目，按 <code>e</code> 编辑菜单，在内核命令行（linux16 那一行，倒数第二行）的结尾附加 <code>rd.break</code>，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">linux16 /vmlinuz-3.10.0-327.el7.x86_64 root=/dev/Mapper/centos-root ro rd.lvm.lv=centos/root rd.lvm.lv=centos/swap rhgb quiet LANG=en_US.UTF-8 rd.break</div></pre></td></tr></table></figure></p>
 <a id="more"></a>
 <p>按 <code>Ctrl</code> + <code>X</code> 执行引导，进入终端。（该参数表示中断 initramfs 向实际系统移交控制权）<br>此时，会显示 root shell，且实际系统的 root 文件系统会在 /sysroot 中以只读方式挂载，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">mount -o remount,rw /sysroot         //已读写方式重新挂载</div><div class="line">chroot /sysroot                      //将文件树的根切换为 sysroot</div><div class="line">echo password | passwd --stdin root  //为root设置新密码，自行替换 password 字符</div></pre></td></tr></table></figure></p>
@@ -65,7 +65,7 @@
     
     <entry>
       <title><![CDATA[RadHat 7 认证系列教程——作者声明]]></title>
-      <url>http://gootoo.top/Linux/RedHat/certified/</url>
+      <url>https://gootoo.top/Linux/RedHat/certified/</url>
       <content type="html"><![CDATA[<h2 id="RedHat-认证体系"><a href="#RedHat-认证体系" class="headerlink" title="RedHat 认证体系"></a>RedHat 认证体系</h2><p>简介一下目前的认证体系：<br>基础：RHCSA（Red Hat Certified System Administrator），红帽认证系统管理员<br>进阶：RHCE（Red Hat Certified Engineer），红帽认证工程师<br>高级：RHCA（Red Hat Certified Architect），红帽认证架构师</p>
 <a id="more"></a>
 <h2 id="版本说明"><a href="#版本说明" class="headerlink" title="版本说明"></a>版本说明</h2><p>本系列全部教程将只包含 RedHat 7 版本，不会涉及 6 及其以下版本。首先 6 的内容非常简单，网上已经有很多相同文章，其次，任何 IT 行业的人。都应该本着学新不学旧的原则，来学习新东西，旧东西毕竟总归会淘汰的。</p>
@@ -85,7 +85,7 @@
     
     <entry>
       <title><![CDATA[科学上网平民钝器──Lantern]]></title>
-      <url>http://gootoo.top/fuckgfw/lantern/</url>
+      <url>https://gootoo.top/fuckgfw/lantern/</url>
       <content type="html"><![CDATA[<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>入门级番羽土啬工具，无需多言。<br>值得一提的是 Google 曾经资助过开发，一种莫名的喜感，有木有~</p>
 <a id="more"></a>
 <h2 id="原理机制"><a href="#原理机制" class="headerlink" title="原理机制"></a>原理机制</h2><p>现在 2.X 版本通过官方自有的服务器或者未封锁地区用户运行的 Lantern 来提供访问。</p>
